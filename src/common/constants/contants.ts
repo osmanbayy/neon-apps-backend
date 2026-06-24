@@ -120,3 +120,5 @@ export const mockUsers = [
     password: 'CrnTas1234#',
   },
 ];
+
+export const DATABASE = 'DATABASE';

@@ -5,6 +5,7 @@ import { UsersModule } from './modules/users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { validateEnv } from './common/config/env.validation';
 import appConfig from './common/config/app.config';
+import { DatabaseModule } from './core/database/database.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import appConfig from './common/config/app.config';
       load: [appConfig],
     }),
     UsersModule,
+    DatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
