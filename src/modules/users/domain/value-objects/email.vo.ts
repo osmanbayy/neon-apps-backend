@@ -1,25 +1,25 @@
 export class Email {
-  private readonly value: string;
+  private constructor(private readonly value: string) {}
 
-  constructor(value: string) {
+  static create(value: string): Email {
     const normalized = value.trim().toLowerCase();
 
     if (!this.isValid(normalized)) {
-      throw new Error('Invalid email');
+      throw new Error('Invalid email address');
     }
 
-    this.value = normalized;
+    return new Email(normalized);
   }
 
-  private isValid(email: string): boolean {
+  private static isValid(email: string): boolean {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  getValue(): string {
-    return this.value;
+  equals(other: Email): boolean {
+    return this.value === other.value;
   }
 
-  equals(other: Email): boolean {
-    return this.value === other.getValue();
+  toString(): string {
+    return this.value;
   }
 }
