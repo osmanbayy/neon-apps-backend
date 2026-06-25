@@ -1,30 +1,30 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { User } from 'src/common/interfaces/user.interface';
+import { UserRepository } from './repositories/user-repository';
+import { User } from './domain/entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
-import { mockUsers } from 'src/common/constants/contants';
+import { Email } from './domain/value-objects/email.vo';
 
 @Injectable()
 export class UsersService {
-  private users: User[] = mockUsers;
+  constructor(private readonly userRepository: UserRepository) {}
 
-  getAllUsers(): User[] {
-    return this.users;
+  async getAllUsers(): Promise<User[]> {
+    return this.userRepository.findAll();
   }
 
-  getUserById(id: number): User {
-    const user = this.users.find((usr) => usr.id === id);
+  async getUserById(id: number): Promise<User> {
+    const user = await this.userRepository.findById(id);
     if (!user) throw new NotFoundException('User not found.');
 
     return user;
   }
 
-  createUser(createUserDto: CreateUserDto): User {
-    const newUser: User = {
-      id: this.users.length + 1,
-      ...createUserDto,
-    };
-    this.users.push(newUser);
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
+    const user = User.create({
+      name: createUserDto.name,
+      email: Email.create(createUserDto.email),
+    });
 
-    return newUser;
+    return this.userRepository.create(user);
   }
 }

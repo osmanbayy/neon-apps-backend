@@ -12,13 +12,14 @@ import * as userInterface from 'src/common/interfaces/user.interface';
 import { CreateUserDto } from './dto/create-user.dto';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import { CurrentUser } from 'src/common/decorators/current-user.decorator';
+import { User } from './domain/entities/user.entity';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  getAllUsers(): userInterface.User[] {
+  async getAllUsers(): Promise<User[]> {
     return this.usersService.getAllUsers();
   }
 
