@@ -22,6 +22,7 @@ export class UserRepository extends BaseRepository<User> {
       .values({
         name: entity.getName(),
         email: entity.getEmail().toString(),
+        password: entity.getPassword(),
       })
       .returning();
 
@@ -31,6 +32,7 @@ export class UserRepository extends BaseRepository<User> {
       id: row.id,
       name: row.name,
       email: Email.create(row.email),
+      password: row.password,
       createdAt: row.createdAt!,
       updatedAt: row.updatedAt!,
       deletedAt: row.deletedAt,
@@ -52,6 +54,7 @@ export class UserRepository extends BaseRepository<User> {
       id: row.id,
       name: row.name,
       email: Email.create(row.email),
+      password: row.password,
       createdAt: row.createdAt!,
       updatedAt: row.updatedAt!,
       deletedAt: row.deletedAt,
@@ -70,6 +73,7 @@ export class UserRepository extends BaseRepository<User> {
       id: row.id,
       name: row.name,
       email: Email.create(row.email),
+      password: row.password,
       createdAt: row.createdAt!,
       updatedAt: row.updatedAt!,
       deletedAt: row.deletedAt,
@@ -89,6 +93,7 @@ export class UserRepository extends BaseRepository<User> {
         id: row.id,
         name: row.name,
         email: Email.create(row.email),
+        password: row.password,
         createdAt: row.createdAt!,
         updatedAt: row.updatedAt!,
         deletedAt: row.deletedAt,
@@ -128,6 +133,7 @@ export class UserRepository extends BaseRepository<User> {
       id: row.id,
       name: row.name,
       email: Email.create(row.email),
+      password: row.password,
       createdAt: row.createdAt!,
       updatedAt: row.updatedAt!,
       deletedAt: row.deletedAt,

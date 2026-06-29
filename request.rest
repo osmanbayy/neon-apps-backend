@@ -2,19 +2,19 @@
 # Content-Type: application/json
 
 # {
-#   "name": "Berkay",
-#   "email": "berkay@example.com"
+#   "name": "Anıl Sezgin",
+#   "email": "asezgin@example.com",
+#   "password": "Qwerty123*"
 # }
 
 # PATCH http://localhost:3000/users/2/restore
 
 
-GET http://localhost:3000/users
+# GET http://localhost:3000/users
 
-# PUT http://localhost:3000/users/1
-# Content-Type: application/json
+PUT http://localhost:3000/users/1
+Content-Type: application/json
 
-# {
-#   "name": "Osman Bay",
-#   "email": "osmanbay@example.com"
-# }
+{
+  "name": "Osman BAy"
+}

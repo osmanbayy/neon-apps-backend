@@ -5,6 +5,7 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { ConfigService } from '@nestjs/config';
+import { ZodValidationPipe } from 'nestjs-zod';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -13,6 +14,8 @@ async function bootstrap() {
   );
 
   const configService = app.get(ConfigService);
+
+  app.useGlobalPipes(new ZodValidationPipe());
 
   const port = configService.getOrThrow<number>('PORT');
   const host = configService.getOrThrow<string>('HOST');

@@ -24,6 +24,7 @@ export class UsersService {
     const user = User.create({
       name: createUserDto.name,
       email: Email.create(createUserDto.email),
+      password: createUserDto.password,
     });
 
     return this.userRepository.create(user);
@@ -37,6 +38,7 @@ export class UsersService {
       id: user.getId()!,
       name: updateUserDto.name,
       email: Email.create(updateUserDto.email),
+      password: user.getPassword(),
       createdAt: user.getCreatedAt()!,
       updatedAt: user.getUpdatedAt()!,
       deletedAt: user.getDeletedAt()!,
