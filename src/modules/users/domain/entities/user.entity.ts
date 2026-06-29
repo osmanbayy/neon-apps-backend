@@ -3,6 +3,7 @@ import { Email } from '../value-objects/email.vo';
 interface CreateUserProps {
   name: string;
   email: Email;
+  phone: string;
   password: string;
 }
 
@@ -10,6 +11,7 @@ interface RestoreUserProps {
   id: number;
   name: string;
   email: Email;
+  phone: string;
   password: string;
   createdAt: Date;
   updatedAt: Date;
@@ -21,6 +23,7 @@ export class User {
     private readonly id: number | null,
     private name: string,
     private email: Email,
+    private phone: string,
     private password: string,
     private readonly createdAt: Date | null,
     private updatedAt: Date | null,
@@ -31,7 +34,16 @@ export class User {
     const name = props.name.trim();
     if (!name) throw new Error('Name cannot be empty.');
 
-    return new User(null, name, props.email, props.password, null, null, null);
+    return new User(
+      null,
+      name,
+      props.email,
+      props.phone,
+      props.password,
+      null,
+      null,
+      null,
+    );
   }
 
   static restore(props: RestoreUserProps): User {
@@ -39,6 +51,7 @@ export class User {
       props.id,
       props.name,
       props.email,
+      props.phone,
       props.password,
       props.createdAt,
       props.updatedAt,
@@ -79,6 +92,10 @@ export class User {
 
   getEmail(): Email {
     return this.email;
+  }
+
+  getPhone(): string {
+    return this.phone;
   }
 
   getPassword(): string {
