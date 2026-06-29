@@ -10,6 +10,8 @@ import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { ExceptionResponse } from '../interfaces/exception-response.interface';
 import { ErrorResponse } from '../interfaces/error-response.interface';
+import { ZodValidationException } from 'nestjs-zod';
+import { ZodValidationResponse } from '../interfaces/zod-validation-response.interface';
 
 @Injectable()
 @Catch()
@@ -25,6 +27,35 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     const response = context.getResponse<Response>();
 
     const isProduction = this.configService.getOrThrow<boolean>('isProduction');
+
+    if (exception instanceof ZodValidationException) {
+      const exceptionResponse =
+        exception.getResponse() as ZodValidationResponse;
+
+      const errors = exceptionResponse.errors.map((issue) => ({
+        field: issue.path.join('.'),
+        message: issue.message,
+      }));
+
+      const body: ErrorResponse = {
+        type: 'Client Error',
+        error: 'ValidationError',
+        message: 'Validation failed',
+        errors,
+        timestamp: new Date().toISOString(),
+        path: request.url,
+        statusCode: 400,
+      };
+
+      if (!isProduction && exception instanceof Error) {
+        body.stack = exception.stack;
+      }
+
+      this.logger.error(JSON.stringify(body));
+
+      response.status(400).send(body);
+      return;
+    }
 
     if (exception instanceof HttpException) {
       const statusCode = exception.getStatus();

@@ -1,20 +1,21 @@
-# POST http://localhost:3000/users
-# Content-Type: application/json
+POST http://localhost:3000/users
+Content-Type: application/json
 
-# {
-#   "name": "Anıl Sezgin",
-#   "email": "asezgin@example.com",
-#   "password": "Qwerty123*"
-# }
+{
+  "name": "Christian",
+  "email": "benteke1@test.com",
+  "password": "Christian123*",
+  "role": "admin"
+}
 
 # PATCH http://localhost:3000/users/2/restore
 
 
 # GET http://localhost:3000/users
 
-PUT http://localhost:3000/users/1
-Content-Type: application/json
+# PUT http://localhost:3000/users/1
+# Content-Type: application/json
 
-{
-  "name": "Osman BAy"
-}
+# {
+#   "name": "Osman BAy"
+# }

@@ -4,6 +4,7 @@ import { User } from './domain/entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Email } from './domain/value-objects/email.vo';
 import { NotFoundError } from 'src/common/exceptions/not-found.exception';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -30,14 +31,16 @@ export class UsersService {
     return this.userRepository.create(user);
   }
 
-  async updateUser(id: number, updateUserDto: CreateUserDto): Promise<User> {
+  async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<User> {
     const user = await this.userRepository.findById(id);
     if (!user) throw new NotFoundError('User not found.');
 
     const updatedUser = User.restore({
       id: user.getId()!,
-      name: updateUserDto.name,
-      email: Email.create(updateUserDto.email),
+      name: updateUserDto.name ?? user.getName(),
+      email: updateUserDto.email
+        ? Email.create(updateUserDto.email)
+        : user.getEmail(),
       password: user.getPassword(),
       createdAt: user.getCreatedAt()!,
       updatedAt: user.getUpdatedAt()!,
