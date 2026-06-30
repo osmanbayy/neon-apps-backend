@@ -13,7 +13,7 @@ import {
 import { UsersService } from './users.service';
 import * as userInterface from 'src/common/interfaces/user.interface';
 import { CreateUserDto } from './dto/create-user.dto';
-import { AuthGuard } from 'src/common/guards/auth.guard';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CurrentUser } from 'src/common/decorators/current-user.decorator';
 import { User } from './domain/entities/user.entity';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -33,7 +33,7 @@ export class UsersController {
   }
 
   @Get('profile')
-  @UseGuards(AuthGuard)
+  @UseGuards(JwtAuthGuard)
   getProfile(@CurrentUser() user: userInterface.AuthUser) {
     return user;
   }

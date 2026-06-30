@@ -1,12 +1,12 @@
-POST http://localhost:3000/users
-Content-Type: application/json
+# POST http://localhost:3000/users
+# Content-Type: application/json
 
-{
-  "name": "Christian",
-  "email": "benteke1@test.com",
-  "password": "Christian123*",
-  "role": "admin"
-}
+# {
+#   "name": "Christian",
+#   "email": "benteke1@test.com",
+#   "password": "Christian123*",
+#   "role": "admin"
+# }
 
 # PATCH http://localhost:3000/users/2/restore
 
@@ -19,3 +19,24 @@ Content-Type: application/json
 # {
 #   "name": "Osman BAy"
 # }
+
+# POST http://localhost:3000/auth/register
+# Content-Type: application/json
+
+# {
+#   "name": "Deneme",
+#   "email": "deneme@test.com",
+#   "password": "Christian123*",
+#   "phone": "05318227028"
+# }
+
+# POST http://localhost:3000/auth/login
+# Content-Type: application/json
+
+# {
+#   "email": "deneme@test.com",
+#   "password": "Christian123*"
+# }
+
+GET http://localhost:3000/auth/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsImVtYWlsIjoiZGVuZW1lQHRlc3QuY29tIiwiaWF0IjoxNzgyODIwODQxfQ.Fpl5afyszhBFpkOVxZOYzHZLJ3Ro02nkutxGATtRZo4

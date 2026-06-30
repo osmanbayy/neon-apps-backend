@@ -8,6 +8,7 @@ import appConfig from './common/config/app.config';
 import { DatabaseModule } from './core/database/database.module';
 import { APP_FILTER } from '@nestjs/core';
 import { GlobalExceptionFilter } from './common/filters/global-exception.filter';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { GlobalExceptionFilter } from './common/filters/global-exception.filter'
     }),
     UsersModule,
     DatabaseModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [

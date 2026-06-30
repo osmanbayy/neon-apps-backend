@@ -121,4 +121,6 @@ export const mockUsers = [
   },
 ];
 
-export const DATABASE = 'DATABASE';
+export const DATABASE = Symbol('DATABASE');
+
+export const JWT_SERVICE = Symbol('JWT_SERVICE');
